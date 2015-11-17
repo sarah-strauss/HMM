@@ -1,0 +1,29 @@
+import numpy as np
+from sklearn import mixture
+from hmmlearn import hmm
+import matplotlib.pyplot as plt
+
+%matplotlib inline
+# Testing 'HMM learn' from github.com
+
+samples_init = np.random.normal(0, 5, 200)
+
+
+# Adding noise
+
+noise = np.random.normal(0, 0.5, 200)
+samples_init += noise
+
+# Initial plotting
+
+plt.hist(samples_init, bins = 80)
+plt.title('Histogram')
+#plt.show()
+
+
+y = np.arange(len(samples_init))
+plt.plot(y, samples_init,'go')
+plt.title('Samples')
+#plt.show()
+
+model = hmm.GaussianHMM(n_components = 3, covariance_type = 'full', algorithm = 'viterbi', tol = 0.1)
